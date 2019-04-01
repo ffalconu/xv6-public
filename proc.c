@@ -538,9 +538,10 @@ getprocs(void)
 {
   struct prop *p;
   int contador=0;
+  sti();
   acquire(&ptable.lock);
 
-  for(p=ptable.proc; p<&ptable.proc[NPROC]; p++)
+  for(p= ptable.proc ; p < &ptable.proc[NPROC] ; p++)
   {
     if (p->state==RUNNING)
     contador++;
