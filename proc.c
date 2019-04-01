@@ -543,8 +543,10 @@ getprocs(void)
 
   for(p= ptable.proc ; p < &ptable.proc[NPROC] ; p++)
   {
-    if (p->state==RUNNING)
+    if (p->state != UNUSED && p-> state != ZOMBIE)
+    {
     contador++;
+    }
   }
   release(&ptable.lock);
   return contador;
