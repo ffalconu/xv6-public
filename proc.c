@@ -534,16 +534,17 @@ procdump(void)
 }
 
 int
-getprocs(void)
+getprocs()
 {
-  struct prop *p;
   int contador=0;
+  struct prop *p;
+
   sti();
   acquire(&ptable.lock);
 
   for(p= ptable.proc ; p < &ptable.proc[NPROC] ; p++)
   {
-    if (p->state != UNUSED && p-> state != ZOMBIE)
+    if (p-> state != UNUSED && p-> state != ZOMBIE)
     {
     contador++;
     }
