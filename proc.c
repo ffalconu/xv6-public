@@ -88,7 +88,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
-
+  p->tickets = 10;
   release(&ptable.lock);
 
   // Allocate kernel stack.
@@ -326,14 +326,35 @@ scheduler(void)
   struct cpu *c = mycpu();
   c->proc = 0;
   
+  int number_tickets;
+  int counter;
+  int winner;
+  
   for(;;){
     // Enable interrupts on this processor.
     sti();
 
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
+    
+    counter=0;
+    winner=0;
+    number_tickets=0;
+
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      if(p->state==RUNNABLE){
+        number_tickets += p->tickets;
+      }
+    }
+
+    winner=random_at_most(number_tickets);
+
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
+        continue;
+
+      counter += p->tickets;
+      if(counter<winner)
         continue;
 
       // Switch to chosen process.  It is the process's job
