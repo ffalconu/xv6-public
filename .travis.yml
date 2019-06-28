@@ -1,0 +1,16 @@
+language: c
+script: make && make fs.img
+deploy:
+  provider: releases
+  api_key:
+    secure: jXRPIO3aMZpgX9rfwU14dVkOUQSrMJ6hPxguL7WTUSSe0Qie6339W5nG5DlXqgwxF3eOPO2EOZeJywMOUlyh03AuDIkfd2zafFhAQV47EvlU9n7xAHuTYohdRL0Z6BbvD4Ws39vEYaP513ki/9cd93Dm5mOypFBX/F3l9DyZLJsp+InScLtiYks7Qre5mOClmAkCsi5lYPnRMjTTiENZfgR0rdissydpHRmErP2NRm/pXfTMUP66eZkNSEn+cMZSvAkki2sfzHGupHRCN5iw3GtZoeH/zA4glw8+xQ0Ae2/Nb4Yk3uRGedkM2eq/FZIq2y5bI/00O9MeUVqhuJ8iGooeXtzcU+65qFluLGTvGkGwujJEqa2khEMV2Hb6SBzvHxDMGtQKcRpE4O8H/XZPG15w25m7A1JIC4NRrLJ1fYuX1FJzSJZNSmXlwVyCz1J2rqk2V0prt1lTZhcjpIzklC07mgkDJiBZr0msfex1I96Hxo+Z3H3gcIvs0XmhO3auM7Kaqh9V9EoFl7KE4jrUMUT0lUZ9yKFIcF6OsW0PCYRkroZkZYwsq3faow8Q2I05mAhr/Hs4jsAhH4O/ysmUERKAtuBRcb9BFzRMIlxAN6SIjuTzKyw+10P8qBKDQqd21qnBME4yTyvzIBttbImwrCihYQSSryKPEp6u8PE8KdA=
+  file:
+    - fs.img 
+    - xv6.img
+    - rand.c
+    - rand.h
+  skip_cleanup: true
+  on:
+    repo: ffalconu/xv6-public
+    branch: xv6_estable
+    tags: true
