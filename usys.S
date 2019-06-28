@@ -29,9 +29,5 @@ SYSCALL(getpid)
 SYSCALL(sbrk)
 SYSCALL(sleep)
 SYSCALL(uptime)
-<<<<<<< HEAD
-SYSCALL(getprocs)
-=======
 SYSCALL(getprocs)
 SYSCALL(settickets)
->>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d

@@ -21,7 +21,4 @@
 #define SYS_mkdir  20
 #define SYS_close  21
 #define SYS_getprocs 22
-<<<<<<< HEAD
-=======
 #define SYS_settickets 23
->>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d
