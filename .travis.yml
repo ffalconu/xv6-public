@@ -7,13 +7,8 @@ deploy:
   file:
     - fs.img 
     - xv6.img
-<<<<<<< HEAD
-    - rand.c
-    - rand.h
-=======
     - rand.h
     - rand.c
->>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d
   skip_cleanup: true
   on:
     repo: ffalconu/xv6-public
