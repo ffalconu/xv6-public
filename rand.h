@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -1167,3 +1168,8 @@
   </body>
 </html>
 
+=======
+void sgenrand(unsigned long);
+long genrand(void);
+long random_at_most(long);
+>>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d

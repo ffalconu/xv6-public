@@ -94,4 +94,22 @@ int
 sys_getprocs(void)
 {
   return getprocs();
+<<<<<<< HEAD
+=======
+}
+
+int
+sys_settickets(void){
+  int ticket_number;
+  if(argint(0, &ticket_number)<0)
+  {
+    proc->tickets=10;
+  }
+
+  else
+  {
+    proc->tickets=ticket_number;
+  }
+  return 0;
+>>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d
 }

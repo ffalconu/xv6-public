@@ -104,6 +104,10 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_getprocs(void);
+<<<<<<< HEAD
+=======
+extern int sys_settickets(void);
+>>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -128,6 +132,10 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_getprocs]    sys_getprocs,
+<<<<<<< HEAD
+=======
+[SYS_settickets]  sys_settickets,
+>>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d
 };
 
 void

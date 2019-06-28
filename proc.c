@@ -89,7 +89,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
-
+  p->tickets = 10;
   release(&ptable.lock);
 
   // Allocate kernel stack.
@@ -324,8 +324,18 @@ void
 scheduler(void)
 {
   struct proc *p;
+<<<<<<< HEAD
   int foundproc = 1;
 
+=======
+  struct cpu *c = mycpu();
+  c->proc = 0;
+  
+  int number_tickets;
+  int counter;
+  int winner;
+  
+>>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d
   for(;;){
     // Enable interrupts on this processor.
     sti();
@@ -348,14 +358,35 @@ scheduler(void)
 
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
+    
+    counter=0;
+    winner=0;
+    number_tickets=0;
+
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      if(p->state==RUNNABLE){
+        number_tickets += p->tickets;
+      }
+    }
+
+    winner=random_at_most(number_tickets);
+
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
+<<<<<<< HEAD
       tickets_passed += p->tickets;
       if(tickets_passed<winner){
         continue;
       }
      // cprintf("tickets are : %d ,  rand no is %ld\n",p->tickets , random_at_most(10000));
+=======
+
+      counter += p->tickets;
+      if(counter<winner)
+        continue;
+
+>>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
@@ -368,7 +399,11 @@ scheduler(void)
 
       // Process is done running for now.
       // It should have changed its p->state before coming back.
+<<<<<<< HEAD
       proc = 0;
+=======
+      c->proc = 0;
+>>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d
       break;
     }
     release(&ptable.lock);
@@ -545,7 +580,7 @@ procdump(void)
       state = states[p->state];
     else
       state = "???";
-    cprintf("%d %s %s", p->pid, state, p->name);
+    cprintf("%d %s %sc%d", p->pid, state, p->name,p->tickets);
     if(p->state == SLEEPING){
       getcallerpcs((uint*)p->context->ebp+2, pc);
       for(i=0; i<10 && pc[i] != 0; i++)
@@ -556,6 +591,7 @@ procdump(void)
 }
 
 int
+<<<<<<< HEAD
 getprocs(void)
 {
   struct prop *p;
@@ -566,6 +602,21 @@ getprocs(void)
   {
     if (p->state!= UNUSED && p->state!=ZOMBIE)
     contador++;
+=======
+getprocs()
+{
+  int contador=0;
+  struct proc *p;
+
+  acquire(&ptable.lock);
+
+  for(p= ptable.proc ; p < &ptable.proc[NPROC] ; p++)
+  {
+    if (p-> state != UNUSED && p-> state != ZOMBIE)
+    {
+    contador++;
+    }
+>>>>>>> f789ebc1af3ab4f1efea60300ea1ca60004e232d
   }
   release(&ptable.lock);
   return contador;
