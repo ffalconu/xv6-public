@@ -10,5 +10,5 @@ deploy:
   skip_cleanup: true
   on:
     repo: ffalconu/xv6-public
-    branch: xv6_estable
+    branch: tarea2
     tags: true
