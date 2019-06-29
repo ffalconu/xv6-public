@@ -336,10 +336,10 @@ scheduler(void)
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
-      ticketsmax = ticketsmax + p->tickets;  
+      ticketsmax = ticketsmax + p->num_tickets;  
     }
 
-    long winner = rand()%total_tickets;
+    int winner = rand()%(ticketsmax);
 
     if (!foundproc) hlt();
     foundproc = 0;
@@ -349,7 +349,7 @@ scheduler(void)
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
-      counter += p->tickets;
+      counter += p->num_tickets;
       if(counter>winner){
         break;
       }
