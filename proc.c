@@ -321,7 +321,7 @@ wait(void)
 //      via swtch back to the scheduler.
 void
 scheduler(void)
-{
+{ //funcion rand expropiada de algun lugar en github jejeje
   struct proc *p;
   int foundproc = 1;
 
@@ -329,17 +329,16 @@ scheduler(void)
     // Enable interrupts on this processor.
     sti();
 
-    int tickets_passed=0;
-    int totalTickets = 0;
+    int counter=0;
+    int ticketsmax= 0;
 
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
-      totalTickets = totalTickets + p->tickets;  
+      ticketsmax = ticketsmax + p->tickets;  
     }
 
-    long winner = random_at_most(totalTickets);
-
+    long winner = random_at_most(ticketsmax);
 
     if (!foundproc) hlt();
     foundproc = 0;
@@ -349,14 +348,10 @@ scheduler(void)
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
-      tickets_passed += p->tickets;
-      if(tickets_passed<winner){
-        continue;
+      counter += p->tickets;
+      if(counter>winner){
+        break;
       }
-     // cprintf("tickets are : %d ,  rand no is %ld\n",p->tickets , random_at_most(10000));
-      // Switch to chosen process.  It is the process's job
-      // to release ptable.lock and then reacquire it
-      // before jumping back to us.
       foundproc = 1;
       proc = p;
       switchuvm(p);
