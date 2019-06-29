@@ -6,7 +6,7 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
-#include "rand.h"
+#include "RNG.h"
 
 struct {
   struct spinlock lock;
@@ -339,7 +339,7 @@ scheduler(void)
       ticketsmax = ticketsmax + p->tickets;  
     }
 
-    long winner = random_at_most(ticketsmax);
+    long winner = rand()%total_tickets;
 
     if (!foundproc) hlt();
     foundproc = 0;
