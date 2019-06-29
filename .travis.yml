@@ -1,0 +1,19 @@
+language: c
+script: make && make fs.img
+deploy:
+provider: releases
+api_key:
+secure: IaLpUDhAKCsOcD+tQ+ORdqxd84jx4qt4GhIJkusda21GyigRR2JCSjPX+I2ljKOLquvHsWaN/Fvz9mRrgF7cThUcrNts3GOuG6sFRSXjqHXXdoOSRhIvIM7dFRBRpl1XgfC9I9JInZzOpHOrh88s5mcUl7OYjSsc/VlzxfmlsURFw0IsdVXnyrjo5ljGDlrEIdl97Cbu/u3xGWABCynOZMbWdfVzO7/YDyjKlj3qQxQ1a0pdPGqKc1SM8TNVcePHJWEHAmJllRGxii0NVZdyB7ZtY2pUIr+Pf1b87G+k2zFbt960LVNPVr1pF9ovzUaz393+Zk71KJwNZD0WG7DkBtXt6F+nGlsR+pxqfl/V1rzIXrKahbhmjiVfnKK1e8nzPkPr2rQZUfBOU9Trk/ren/MuLquPRu+VqbrbGc4LFoz6Lmj/2TwsIXTiWfgS3ZN2OrRkUo/9vgX9A3bs9mWMr1FzkhIYK3ai4PYqGZtv/KZ4N7XyKRPJKhzFksWrCloxywi0LHCPOBrCkGtpOtCPMTUOw8W/8wBg/S/Ntn85DsOWc7yzl3fahfbwSlz08hzvdZp86nOlxPFBDLjkTmJ6TX1w19aWsYDfmOwRtr+KRXPjrgyPOW+LjZMPTizahmxCNtqTeMpCV4cv9Vihl/BdaXUiEg86ZR8prVcBPrwAGjU=
+file:
+- fs.img
+- xv6.img
+skip_cleanup: true
+on:
+    repo: ffalconu/xv6-public
+    branch: correctiontarea2
+    tags: true
+
+
+
+
+
